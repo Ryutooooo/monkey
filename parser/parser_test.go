@@ -95,7 +95,7 @@ return 993322;
 			len(program.Statements))
 	}
 
-  for _, stmt := range program.Statements {
+	for _, stmt := range program.Statements {
 		returnStmt, ok := stmt.(*ast.ReturnStatement)
 		if !ok {
 			t.Errorf("stmt not *ast.returnStatement. got=%T", stmt)
