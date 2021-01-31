@@ -2,7 +2,7 @@
 
 package lexer
 
-import "monkey/token"
+import "github.com/Ryutooooo/monkey/token"
 
 type Lexer struct {
 	input        string

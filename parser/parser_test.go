@@ -3,9 +3,10 @@
 package parser
 
 import (
-	"monkey/ast"
-	"monkey/lexer"
 	"testing"
+
+	"github.com/Ryutooooo/monkey/ast"
+	"github.com/Ryutooooo/monkey/lexer"
 )
 
 func TestLetStatements(t *testing.T) {

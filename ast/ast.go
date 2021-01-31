@@ -4,7 +4,8 @@ package ast
 
 import (
 	"bytes"
-	"monkey/token"
+
+	"github.com/Ryutooooo/monkey/token"
 )
 
 type Node interface {
