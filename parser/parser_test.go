@@ -216,7 +216,7 @@ func TestParsingPrefixExpressions(t *testing.T) {
 func testIntegerLiteral(t *testing.T, il ast.Expression, value int64) bool {
 	integ, ok := il.(*ast.IntegerLiteral)
 	if !ok {
-		t.Errorf("il not *ast.INtegerLiteral. got=%T", il)
+		t.Errorf("il not *ast.IntegerLiteral. got=%T", il)
 		return false
 	}
 	if integ.Value != value {
@@ -468,7 +468,7 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
 	}
 }
 
-func TestIfEXpression(t *testing.T) {
+func TestIfExpression(t *testing.T) {
 	input := `if (x < y) { x }`
 
 	l := lexer.New(input)
