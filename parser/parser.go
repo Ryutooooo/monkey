@@ -79,7 +79,7 @@ func New(l *lexer.Lexer) *Parser {
 
 	p.registerInfix(token.LPAREN, p.parseCallExpression)
 
-	// read two token, and set both current and peek
+	// Read two tokens, so curToken and peekToken are both set
 	p.nextToken()
 	p.nextToken()
 
@@ -116,7 +116,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 	program := &ast.Program{}
 	program.Statements = []ast.Statement{}
 
-	for p.curToken.Type != token.EOF {
+	for !p.curTokenIs(token.EOF) {
 		stmt := p.parseStatement()
 		if stmt != nil {
 			program.Statements = append(program.Statements, stmt)
@@ -174,7 +174,7 @@ func (p *Parser) parseReturnStatement() *ast.ReturnStatement {
 
 	stmt.ReturnValue = p.parseExpression(LOWEST)
 
-	for p.curTokenIs(token.SEMICOLON) {
+	for p.peekTokenIs(token.SEMICOLON) {
 		p.nextToken()
 	}
 
@@ -340,6 +340,7 @@ func (p *Parser) parseFunctionParameters() []*ast.Identifier {
 
 func (p *Parser) parseIfExpression() ast.Expression {
 	expression := &ast.IfExpression{Token: p.curToken}
+
 	if !p.expectPeek(token.LPAREN) {
 		return nil
 	}
