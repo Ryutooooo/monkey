@@ -9,16 +9,19 @@ import (
 	"github.com/Ryutooooo/monkey/token"
 )
 
+// The base Node interface
 type Node interface {
 	TokenLiteral() string
 	String() string
 }
 
+// All statement nodes implement this
 type Statement interface {
 	Node
 	statementNode()
 }
 
+// All expression nodes implement this
 type Expression interface {
 	Node
 	expressionNode()
@@ -46,8 +49,9 @@ func (p *Program) String() string {
 	return out.String()
 }
 
+// Statements
 type LetStatement struct {
-	Token token.Token // token.LET
+	Token token.Token // the token.LET token
 	Name  *Identifier
 	Value Expression
 }
@@ -71,7 +75,7 @@ func (ls *LetStatement) String() string {
 }
 
 type ReturnStatement struct {
-	Token       token.Token // token.RETURN
+	Token       token.Token // the 'return' token
 	ReturnValue Expression
 }
 
@@ -92,7 +96,7 @@ func (rs *ReturnStatement) String() string {
 }
 
 type ExpressionStatement struct {
-	Token      token.Token
+	Token      token.Token // the first token of the expression
 	Expression Expression
 }
 
@@ -106,7 +110,7 @@ func (es *ExpressionStatement) String() string {
 }
 
 type Identifier struct {
-	Token token.Token // token.IDENT
+	Token token.Token // the token.IDENT token
 	Value string
 }
 
@@ -149,7 +153,7 @@ func (fl *FunctionLiteral) String() string {
 }
 
 type PrefixExpression struct {
-	Token    token.Token // e.g. ! etc...
+	Token    token.Token // The prefix token, e.g. !
 	Operator string
 	Right    Expression
 }
@@ -167,7 +171,7 @@ func (pe *PrefixExpression) String() string {
 }
 
 type InfixExpression struct {
-	Token    token.Token // e.g. + etc...
+	Token    token.Token // The operator token, e.g. +
 	Left     Expression
 	Operator string
 	Right    Expression
@@ -188,7 +192,7 @@ func (oe *InfixExpression) String() string {
 }
 
 type IfExpression struct {
-	Token       token.Token // 'if'
+	Token       token.Token // The 'if' token
 	Condition   Expression
 	Consequence *BlockStatement
 	Alternative *BlockStatement
@@ -213,7 +217,7 @@ func (ie *IfExpression) String() string {
 }
 
 type CallExpression struct {
-	Token     token.Token // '('
+	Token     token.Token // The '(' token
 	Function  Expression  // Identifier or FunctionLiteral
 	Arguments []Expression
 }
